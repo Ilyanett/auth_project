@@ -1,0 +1,25 @@
+# Виртуальное окружение
+venv/
+.venv/
+
+# Настройки Django
+*.pyc
+__pycache__/
+*.pyo
+
+# База данных SQLite (если вдруг появится)
+db.sqlite3
+
+# Секретные данные
+.env
+*.env
+
+# Системные файлы
+.DS_Store        # Mac
+Thumbs.db        # Windows
+
+# IDE файлы
+.vscode/
+.idea/
+*.swp
+
