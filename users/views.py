@@ -9,14 +9,20 @@ from .models import BlacklistedToken
 class RegisterView(View):
 
     def post(self, request):
-
         data = json.loads(request.body)
         email = data.get('email')
         password = data.get('password')
+        password_confirm = data.get('password_confirm')
 
-        if not email or not password:
+        if not email or not password or not password_confirm:
             return JsonResponse(
-                {'error': 'Email и пароль обязательны'},
+                {'error': 'Email, пароль и подтверждение пароля обязательны'},
+                status=400
+            )
+
+        if password != password_confirm:
+            return JsonResponse(
+                {'error': 'Пароли не совпадают'},
                 status=400
             )
 
@@ -29,6 +35,7 @@ class RegisterView(View):
         user = User(
             email=email,
             first_name=data.get('first_name', ''),
+            middle_name=data.get('middle_name', ''),
             last_name=data.get('last_name', ''),
         )
         user.set_password(password)
